@@ -41,8 +41,11 @@ const scanElements = async () => {
 
   const { applyFilters, send, report } = await makeFilteredUtilities(version);
 
+  console.log('d1.2', posts);
   await applyFilters(posts);
+  console.log('d1.3', posts);
   await report(posts);
+  console.log('d1.4', posts);
   await send(posts); // TODO: send should not also tag as processed. That should be a separate step.
 };
 

@@ -76,6 +76,18 @@ const getAdTargetingData = async (adId, clientToken, data) => {
     const doFetch = makeFetcher();
     const response = await doFetch(url, metadata);
 
+    console.log(
+      'getAdTargetingData',
+      adId,
+      clientToken,
+      data,
+      body,
+      url,
+      metadata,
+      doFetch,
+      response
+    );
+
     /* istanbul ignore if */
     if (!response.ok) return null;
 
