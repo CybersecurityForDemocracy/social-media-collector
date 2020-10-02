@@ -60,5 +60,15 @@
     console.log('Injected XHR Monkey Patch script.');
   };
 
-  inject();
+  fetch('http://localhost:5000/ok')
+    .then(response => response.json())
+    .then(data => {
+      if (data.ytStatus === 'ok') {
+        inject();
+      } else {
+        if (process.env.IS_DEBUG === 'true') {
+          console.log("Didn't inject XHR Monkey Patch script.");
+        }
+      }
+    });
 })();

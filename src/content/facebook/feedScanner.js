@@ -97,10 +97,24 @@ export const start = () => {
     return;
   }
 
-  window.addEventListener('message', paramsHandler);
-  isStarted = true;
+  fetch('http://localhost:5000/ok')
+    .then(response => response.json())
+    .then(data => {
+      if (data.fbStatus === 'ok') {
+        window.addEventListener('message', paramsHandler);
+        isStarted = true;
 
-  window.postMessage({ type: 'getAsyncParams' });
+        window.postMessage({ type: 'getAsyncParams' });
+
+        if (process.env.IS_DEBUG === 'true') {
+          console.debug('Started feed scanner, ok.');
+        }
+      } else {
+        if (process.env.IS_DEBUG === 'true') {
+          console.log("Didn't start feed scanner, something is not ok.");
+        }
+      }
+    });
 };
 
 reset(); // just to set the initial values.

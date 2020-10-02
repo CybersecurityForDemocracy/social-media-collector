@@ -187,13 +187,23 @@
   }
   `;
 
-  const script = document.createElement('script');
-  const code = document.createTextNode(trust);
-  script.appendChild(code);
-  document.documentElement.appendChild(script);
-  script.remove();
+  fetch('http://localhost:5000/ok')
+    .then(response => response.json())
+    .then(data => {
+      if (data.fbStatus === 'ok') {
+        const script = document.createElement('script');
+        const code = document.createTextNode(trust);
+        script.appendChild(code);
+        document.documentElement.appendChild(script);
+        script.remove();
 
-  if (process.env.IS_DEBUG === 'true') {
-    console.log('Created trust script.');
-  }
+        if (process.env.IS_DEBUG === 'true') {
+          console.log('Created trust script.');
+        }
+      } else {
+        if (process.env.IS_DEBUG === 'true') {
+          console.log("Didn't create trust script.");
+        }
+      }
+    });
 })();

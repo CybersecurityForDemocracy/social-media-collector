@@ -5,6 +5,19 @@ import makeHandler from './utils/makeHandler';
 const handler = makeHandler(adAnalysis, adReporting);
 
 export const start = () => {
-  console.debug('Start YouTube scanner', chrome.runtime.id);
-  window.addEventListener('message', handler);
+  fetch('http://localhost:5000/ok')
+    .then(response => response.json())
+    .then(data => {
+      if (data.ytStatus === 'ok') {
+        window.addEventListener('message', handler);
+
+        if (process.env.IS_DEBUG === 'true') {
+          console.debug('Start YouTube scanner', chrome.runtime.id);
+        }
+      } else {
+        if (process.env.IS_DEBUG === 'true') {
+          console.log("Didn't start YT script.");
+        }
+      }
+    });
 };

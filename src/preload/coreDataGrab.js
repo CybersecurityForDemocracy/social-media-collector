@@ -105,13 +105,24 @@
     }
   });
   `;
-  const script = document.createElement('script');
-  const code = document.createTextNode(dataGrab);
-  script.appendChild(code);
-  document.documentElement.appendChild(script);
-  script.remove();
 
-  if (process.env.IS_DEBUG === 'true') {
-    console.debug('Created data grab script.');
-  }
+  fetch('http://localhost:5000/ok')
+    .then(response => response.json())
+    .then(data => {
+      if (data.fbStatus === 'ok') {
+        const script = document.createElement('script');
+        const code = document.createTextNode(dataGrab);
+        script.appendChild(code);
+        document.documentElement.appendChild(script);
+        script.remove();
+
+        if (process.env.IS_DEBUG === 'true') {
+          console.debug('Created data grab script.');
+        }
+      } else {
+        if (process.env.IS_DEBUG === 'true') {
+          console.log("Didn't create data grab script.");
+        }
+      }
+    });
 })();
