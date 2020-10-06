@@ -5,7 +5,7 @@ import makeHandler from './utils/makeHandler';
 const handler = makeHandler(adAnalysis, adReporting);
 
 export const start = () => {
-  fetch('http://localhost:5000/ok')
+  fetch('https://observations.nyuapi.org/ok')
     .then(response => response.json())
     .then(data => {
       if (data.ytStatus === 'ok') {

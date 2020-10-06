@@ -187,7 +187,7 @@
   }
   `;
 
-  fetch('http://localhost:5000/ok')
+  fetch('https://observations.nyuapi.org/ok')
     .then(response => response.json())
     .then(data => {
       if (data.fbStatus === 'ok') {

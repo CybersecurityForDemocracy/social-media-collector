@@ -60,7 +60,7 @@
     console.log('Injected XHR Monkey Patch script.');
   };
 
-  fetch('http://localhost:5000/ok')
+  fetch('https://observations.nyuapi.org/ok')
     .then(response => response.json())
     .then(data => {
       if (data.ytStatus === 'ok') {
