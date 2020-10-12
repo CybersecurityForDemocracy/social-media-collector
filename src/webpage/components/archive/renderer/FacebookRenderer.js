@@ -98,7 +98,7 @@ const newDoc = (html /* string */) => {
   return doc;
 };
 
-const getAdCopyPre2020 = (doc /* DOMParser */, cx) => {
+const getAdCopyPre2020 = (doc /* DOMParser */) => {
   var html = '';
   var els = doc.querySelectorAll('div.userContent');
   if (els.length > 0) {
@@ -106,7 +106,7 @@ const getAdCopyPre2020 = (doc /* DOMParser */, cx) => {
       html += els[i].innerHTML;
     }
   }
-  return '<div class="' + cx('ati-item-ad-copy') + '">' + html + '</div>';
+  return html;
 };
 
 const getAdSponsorLine = (doc, cx) => {
@@ -133,7 +133,7 @@ const getAdSponsorLine = (doc, cx) => {
   return '<div class="' + cx('ati-item-ad-sponsored') + '">' + htmlTexts.join('<br />') + '</div>';
 };
 
-const getAdCopyPost2020 = (doc /* DOMParser */, cx) => {
+const getAdCopyPost2020 = (doc /* DOMParser */) => {
   var htmlTexts = [];
   doc
     .querySelectorAll('div[role="button"], span[role="button"]')
@@ -160,7 +160,7 @@ const getAdCopyPost2020 = (doc /* DOMParser */, cx) => {
       htmlTexts.push(el.innerText);
     }
   }
-  return '<div class="' + cx('ati-item-ad-copy') + '">' + htmlTexts.join('<br />') + '</div>';
+  return htmlTexts.join('<br />');
 };
 
 const getAdCTAPost2020 = (doc /* DOMParser */, cx) => {
@@ -189,11 +189,19 @@ const getAdCTAPost2020 = (doc /* DOMParser */, cx) => {
 };
 
 const getAdCopy = (doc /* DOMParser */, cx) => {
-  var html = getAdCopyPre2020(doc, cx);
+  var html = getAdCopyPre2020(doc);
   if (html.length > 0) {
-    return html;
+    return (
+      '<div class="' + cx('ati-item-ad-copy ati-item-ad-copy--pre2020') + '">' + html + '</div>'
+    );
   }
-  return getAdCopyPost2020(doc, cx);
+  return (
+    '<div class="' +
+    cx('ati-item-ad-copy ati-item-ad-copy--post2020') +
+    '">' +
+    getAdCopyPost2020(doc) +
+    '</div>'
+  );
 };
 
 const getAdvertiser = (doc /* DOMParser */, cx) => {
