@@ -48,7 +48,21 @@ const reducer = combineReducers({
 const store = configureStore({
   reducer,
   middleware: [
-    ...getDefaultMiddleware({ thunk: false }), // using sagas not thunks
+    ...getDefaultMiddleware({
+      thunk: false,
+      serializableCheck: {
+        // Ignore these action types
+        ignoredActions: [
+          'VIEWED_CONSENT_FAILED',
+          'SAVE_CONSENT',
+          'SAVE_CONSENT_SUCCESS',
+          'NAVIGATE',
+          'NAVIGATE_SUCCESS',
+          'NAVIGATE_FAILED',
+          'SAVE_CONSENT_FAILED'
+        ]
+      }
+    }), // using sagas not thunks
     sagaMiddleware
   ],
   devTools: true

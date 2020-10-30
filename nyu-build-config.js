@@ -16,12 +16,8 @@ module.exports = (isDebug = false) => ({
   assetsPath: 'assets',
   defaultIcon: 'icon128.png',
 
-  helpText: `
-  <p>
-  </p>`,
-  preferencesPageFooter: `
-  <p>
-  </p>`,
+  helpText: `<p>Need help? Email info@adobservatory.org</p>`,
+  preferencesPageFooter: ``,
 
   consentText: `<style>
   p,h1,h4,h3,ul{

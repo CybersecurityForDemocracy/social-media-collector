@@ -14,6 +14,8 @@ module.exports = (isDebug = false) => ({
   homepage: 'https://adobserver.org',
   assetsPath: 'assets',
   defaultIcon: 'icon128.png',
+  helpText: `<p>Need help? Email info@adobservatory.org</p>`,
+  preferencesPageFooter: ``,
   consentText: `<style>
   p,h1,h4,h3,ul{
              margin: 2vmax;
