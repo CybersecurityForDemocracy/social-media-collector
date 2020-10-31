@@ -7,7 +7,17 @@ const useNavigation = () => {
 
   const dispatch = useDispatch();
 
-  const goto = useCallback(destination => dispatch(actions.navigate(destination)), [dispatch]);
+  const goto = useCallback(
+    destination => {
+      const a = actions.navigate(destination);
+
+      /* eslint-disable */
+      //debugger;
+
+      dispatch(a);
+    },
+    [dispatch]
+  );
 
   return { current, goto };
 };

@@ -7,7 +7,8 @@ const decodeJson = encoded => {
 };
 
 export const encode = unencoded =>
-  unencoded !== undefined ? Buffer.from(JSON.stringify(unencoded)).toString('base64') : undefined;
+  unencoded !== undefined ? JSON.stringify(unencoded) : undefined;
+// unencoded !== undefined ? Buffer.from(JSON.stringify(unencoded)).toString('base64') : undefined;
 
 export const decode = encoded => (typeof encoded === 'string' ? decodeJson(encoded) : encoded);
 
