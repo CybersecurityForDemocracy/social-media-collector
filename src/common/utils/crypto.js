@@ -1,14 +1,30 @@
 const decodeJson = encoded => {
   try {
-    return JSON.parse(Buffer.from(encoded, 'base64').toString());
+    if (typeof Buffer !== 'undefined') {
+      return JSON.parse(Buffer.from(encoded, 'base64').toString());
+    } else if (typeof atob !== 'undefined') {
+      return JSON.parse(atob(encoded, 'base64'));
+    } else {
+      console.error('base64 function not found. Throwing error.');
+      throw new Error('base64 function not found. Throwing error.');
+    }
   } catch (err) {
     return encoded;
   }
 };
 
-export const encode = unencoded =>
-  unencoded !== undefined ? JSON.stringify(unencoded) : undefined;
-// unencoded !== undefined ? Buffer.from(JSON.stringify(unencoded)).toString('base64') : undefined;
+export const encode = unencoded => {
+  if (typeof Buffer !== 'undefined') {
+    return unencoded !== undefined
+      ? Buffer.from(JSON.stringify(unencoded)).toString('base64')
+      : undefined;
+  } else if (typeof btoa !== 'undefined') {
+    return unencoded !== undefined ? btoa(JSON.stringify(unencoded)) : undefined;
+  } else {
+    console.error('base64 function not found. Throwing error.');
+    throw new Error('base64 function not found. Throwing error.');
+  }
+};
 
 export const decode = encoded => (typeof encoded === 'string' ? decodeJson(encoded) : encoded);
 

@@ -28,6 +28,13 @@ export const getConsentViewedAt = async () => getItem(CONSENT_VIEWED_AT);
 export const checkConsent = async () => {
   const consent = await getItem(CONSENT, 0);
 
+  const t = typeof consent;
+  if (t !== 'number' && t !== undefined && consent !== null) {
+    console.error(
+      'Consent type should be a number or undefined or null. Got: ' + consent + ',' + t
+    );
+  }
+
   return !consent
     ? 0
     : typeof consent === 'number' && consent < CURRENT_CONSENT_VERSION
