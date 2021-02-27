@@ -29,7 +29,6 @@ const cleanup = () => {
 
 const id = '123456';
 const post = { id };
-const version = 'pre2020';
 
 describe('makeFilteredFlagPostAsProcessed', () => {
   beforeAll(() => {
@@ -44,32 +43,6 @@ describe('makeFilteredFlagPostAsProcessed', () => {
       ...post,
       isProcessed: true
     });
-  });
-});
-
-describe('makeFilteredApplyAdTargeting', () => {
-  beforeAll(() => {
-    const processed = makeFilteredApplyAdTargeting(filterFn, version);
-    processed([post]);
-  });
-
-  afterAll(cleanup);
-
-  it('called extractAdTargetingFromPosts with the filtered posts', () => {
-    expect(extractAdTargetingFromPosts).toHaveBeenCalledWith([post], version);
-  });
-});
-
-describe('makeFilteredApplyAdId', () => {
-  beforeAll(() => {
-    const processed = makeFilteredApplyAdId(filterFn, version);
-    processed([post]);
-  });
-
-  afterAll(cleanup);
-
-  it('called extractAdIdFromPosts with the filtered posts', () => {
-    expect(extractAdIdFromPosts).toHaveBeenCalledWith([post], version);
   });
 });
 
@@ -88,25 +61,5 @@ describe('makeFilteredPostSender', () => {
 
   it('called sendPosts with the posts', () => {
     expect(sendPosts).toHaveBeenCalledWith([post]);
-  });
-});
-
-describe('makeFilteredPostReporter', () => {
-  const permissions = {};
-
-  beforeAll(() => {
-    posts.getSavedPost.mockReturnValue(post);
-    const report = makeFilteredPostReporter(filterFn, version);
-    report([post], permissions);
-  });
-
-  afterAll(cleanup);
-
-  it("called getSavedPost with the post's id", () => {
-    expect(posts.getSavedPost).toHaveBeenCalledWith(id);
-  });
-
-  it('called reportPosts with the posts', () => {
-    expect(reportPosts).toHaveBeenCalledWith([post], permissions, version);
   });
 });

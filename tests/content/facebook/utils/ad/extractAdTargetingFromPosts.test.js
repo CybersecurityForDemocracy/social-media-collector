@@ -1,25 +1,19 @@
 import extractAdTargetingFromPost2020Post from 'content/facebook/utils/ad/post2020/extractAdTargetingFromPost';
-import extractAdTargetingFromPre2020Post from 'content/facebook/utils/ad/pre2020/extractAdTargetingFromPost';
 import extractAdTargetingFromPosts from 'content/facebook/utils/ad/extractAdTargetingFromPosts';
 
 import { VERSION } from 'content/facebook/constants';
 
-jest.mock('content/facebook/utils/ad/pre2020/extractAdTargetingFromPost');
 jest.mock('content/facebook/utils/ad/post2020/extractAdTargetingFromPost');
 
 const posts = ['some', 'post'];
 
 const cleanup = () => {
   extractAdTargetingFromPost2020Post.mockReset();
-  extractAdTargetingFromPre2020Post.mockReset();
 };
 
 const doTest = version => {
   describe(`when version is ${version}`, () => {
-    const extractAdTargetingFromPost =
-      version === VERSION.PRE_2020
-        ? extractAdTargetingFromPre2020Post
-        : extractAdTargetingFromPost2020Post;
+    const extractAdTargetingFromPost = extractAdTargetingFromPost2020Post;
 
     describe('when it works', () => {
       beforeAll(async () => {
