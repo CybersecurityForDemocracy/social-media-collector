@@ -98,17 +98,6 @@ const newDoc = (html /* string */) => {
   return doc;
 };
 
-const getAdCopyPre2020 = (doc /* DOMParser */) => {
-  var html = '';
-  var els = doc.querySelectorAll('div.userContent');
-  if (els.length > 0) {
-    for (var i = 0; i < els.length; ++i) {
-      html += els[i].innerHTML;
-    }
-  }
-  return html;
-};
-
 const getAdSponsorLine = (doc, cx) => {
   var htmlTexts = [];
 
@@ -189,12 +178,6 @@ const getAdCTAPost2020 = (doc /* DOMParser */, cx) => {
 };
 
 const getAdCopy = (doc /* DOMParser */, cx) => {
-  var html = getAdCopyPre2020(doc);
-  if (html.length > 0) {
-    return (
-      '<div class="' + cx('ati-item-ad-copy ati-item-ad-copy--pre2020') + '">' + html + '</div>'
-    );
-  }
   return (
     '<div class="' +
     cx('ati-item-ad-copy ati-item-ad-copy--post2020') +
@@ -205,16 +188,8 @@ const getAdCopy = (doc /* DOMParser */, cx) => {
 };
 
 const getAdvertiser = (doc /* DOMParser */, cx) => {
-  // pre2020
-  var els = doc.querySelectorAll('a[data-hovercard]');
-  if (els.length > 1) {
-    return '<div class="' + cx('ati-item-advertiser') + '">' + els[1].outerHTML + '</div>';
-  } else if (els.length === 1) {
-    return '<div class="' + cx('ati-item-advertiser') + '">' + els[0].outerHTML + '</div>';
-  }
-
   // post2020
-  els = doc.querySelectorAll('h4[dir="auto"]');
+  var els = doc.querySelectorAll('h4[dir="auto"]');
   if (els.length === 0) {
     return '';
   }
@@ -248,12 +223,6 @@ const getCTALink = (doc /* DOMParser */, cx) => {
 };
 
 const getAdAdvertiserThumbnail = (doc /* DOMParser */, cx) => {
-  // pre2020
-  // var els = doc.querySelectorAll('img[role="img"]');
-  // if (els.length > 1) {
-  //   return '<div class="'+cx('ati-item-advertiser')+'">' + els[1].outerHTML + '</div>';
-  // }
-
   // post2020
   var els = doc.querySelectorAll('img[role="img"]');
   if (els.length === 0) {

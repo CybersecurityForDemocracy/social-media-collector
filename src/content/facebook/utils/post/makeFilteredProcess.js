@@ -23,7 +23,7 @@ export const makeFilteredFlagPostAsProcessed = filterFn => {
  *  Return a function that filters the posts and then applies ad targeting data to them.
  *
  * @param {Function} filterFn — a filter function.
- * @param {String} version — either pre2020 or post2020.
+ * @param {String} version — just 'post2020' for now..
  * @return {Function} a Promise that resolves to undefined, or rejects with an error.
  * @sideeffect The updated post is saved to the `ALL_POSTS` set.
  */
@@ -34,7 +34,7 @@ export const makeFilteredApplyAdTargeting = (filterFn, version) => async posts =
  *  Return a function that filters the posts and then applies adId to them.
  *
  * @param {Function} filterFn — a filter function.
- * @param {String} version — either pre2020 or post2020.
+ * @param {String} version — just 'post2020' for now..
  * @return {Function} a function that applies adId data to the filtered posts
  * @sideeffect The updated post is saved to the `ALL_POSTS` set.
  */
@@ -46,7 +46,7 @@ export const makeFilteredApplyAdId = (filterFn, version) => async posts =>
  *  filters according to the supplied filter, then sends it to the back end.
  *
  * @param {Function} filterFn — a filter function.
- * @param {String} version — either pre2020 or post2020.
+ * @param {String} version — just 'post2020' for now..
  * @return {Function} a function that tags the post in the ui appropriately.
  * @sideeffect The updated post is saved to the `ALL_POSTS` set.
  */
