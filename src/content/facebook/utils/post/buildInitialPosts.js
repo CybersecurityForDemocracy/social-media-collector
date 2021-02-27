@@ -1,4 +1,3 @@
-import makeInitialPre2020Post from './pre2020/makeInitialPost';
 import makeInitialPost2020Post from './post2020/makeInitialPost';
 
 import determineFbVersion from './determineFbVersion';
@@ -11,10 +10,10 @@ import determineFbVersion from './determineFbVersion';
  */
 const buildInitialPosts = (/* istanbul ignore next */ doc = document) => {
   const { elements, version } = determineFbVersion(doc);
-
-  const makeInitialPost = version === 'pre2020' ? makeInitialPre2020Post : makeInitialPost2020Post;
-
-  return { posts: elements.map(makeInitialPost).filter(Boolean), version };
+  return {
+    posts: elements.map(makeInitialPost2020Post).filter(Boolean),
+    version
+  };
 };
 
 export default buildInitialPosts;

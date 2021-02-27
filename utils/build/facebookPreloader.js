@@ -1,5 +1,5 @@
 const generic = require('./generic');
 
-const facebookPreloader = data => generic(data, 'preload', ['./preload/trust.js', './preload/coreDataGrab.js']);
+const facebookPreloader = data => generic(data, 'preload', ['./preload/coreDataGrab.js']);
 
 module.exports = facebookPreloader;
