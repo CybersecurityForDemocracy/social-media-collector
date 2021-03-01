@@ -30,7 +30,8 @@ beforeAll(() => {
 
 describe('post2020', () => {
   beforeAll(() => {
-    querySelectorAll.mockReturnValueOnce([]).mockReturnValueOnce(elements);
+    querySelectorAll.mockReturnValueOnce(elements);
+    notOverlapping.mockImplementation(() => elements);
 
     result = determineFbVersion(doc);
   });
