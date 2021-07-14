@@ -1,4 +1,5 @@
 import getInstallationId from '../utils/getInstallationId';
+import parseFbObservation from 'content/facebook/utils/ad/post2020/parseFbObservation';
 import { getPreference } from 'common/storage/preference';
 import { checkPermission } from 'common/storage/permission';
 import { checkConsent } from 'common/storage/consent';
@@ -60,7 +61,10 @@ const makePayload = async items => {
   if (shareGc) metadata.genderCode = genderCode;
   if (shareAc) metadata.ageCode = ageCode;
 
-  return { metadata, items };
+  // Add payload of objects that was originally done in python.
+  const parsedFbObservations = parseFbObservation({ metadata, items });
+
+  return { metadata, items, parsedFbObservations };
 };
 
 export default makePayload;
